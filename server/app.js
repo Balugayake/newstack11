@@ -5,7 +5,7 @@ app.use(express.json());
 export default app;
 
 dotenv.config({
-  path: "./config/config.env",
+  path: "server/config/config.env",
 });
 
 //routers
