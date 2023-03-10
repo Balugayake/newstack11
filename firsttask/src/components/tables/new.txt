@@ -1,0 +1,75 @@
+ 
+ 
+  data.continents.forEach((continent) => {
+    continent.countries.forEach((country) => {
+      country.states.forEach((state) => {
+        const countryCapital = data.countryCapitals.find(
+          (capital) => capital.countryId === country._id
+        );
+        const stateCapital = data.stateCapitals.find(
+          (capital) => capital.stateId === state._id
+        );
+        tableData.push({
+          _id: continent._id,
+          continentName: continent.name,
+          numOfCountries: continent.noOfCountry,
+          countryId: country._id,
+          countryName: country.name,
+          numOfStates: country.NoOfState,
+          population: country.population,
+          stateId: state._id,
+          stateName: state.name,
+          numOfCities: state.NoOfCity,
+          countryCapitalName: countryCapital ? countryCapital.name : "",
+          stateCapitalName: stateCapital ? stateCapital.name : "",
+        });
+      });
+    });
+  });
+ {/* <div>
+        <table striped bordered hover>
+          <thead>
+            <tr>
+              <th>_id</th>
+              <th>Continent Name</th>
+              <th>No. of Countries</th>
+              <th>Country Id</th>
+              <th>Country Name</th>
+              <th>No. of state</th>
+              <th>population</th>
+              <th>State Id</th>
+              <th>state Name</th>
+              <th>No. of city</th>
+              <th>Country Capital Name</th>
+              <th>State Capital Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableData.map((data) => (
+              <tr key={data._id}>
+                <td>{data._id}</td>
+                <td>{data.continentName}</td>
+                <td>{data.numOfCountries}</td>
+                <td>{data.countryId}</td>
+                <td>{data.countryName}</td>
+                <td>{data.numOfStates}</td>
+                <td>{data.population}</td>
+                <td>{data.stateId}</td>
+                <td>{data.stateName}</td>
+                <td>{data.numOfCities}</td>
+                <td>{data.countryCapitalName}</td>
+                <td>{data.stateCapitalName}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      useEffect(() => {
+    const [data, setData] = useState();
+    const fetchData = async () => {
+      const response = await axios.get(`/v1/api/getdata`);
+      setData(response.data);
+    };
+    fetchData();
+  }, []);
