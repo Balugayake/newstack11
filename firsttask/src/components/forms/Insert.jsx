@@ -14,12 +14,16 @@ const Insert = () => {
     countryCapitalName: "",
     stateCapitalName: "",
   });
+  const formatInput = (input) => {
+    return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+    const formattedValue = formatInput(value);
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: formattedValue,
     }));
   };
   const [showPopup, setShowPopup] = useState(false);

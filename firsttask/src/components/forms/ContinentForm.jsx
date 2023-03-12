@@ -2,26 +2,29 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import "../../styles/forms.scss";
 function ContinentForm(props) {
   const location = useLocation();
   const navigate = useNavigate();
-  const data = location.state;
+  const { data } = location.state;
   console.log("data  is", data);
   const [formData, setFormData] = useState({
-    id: "640a2d528e990ee08a9b0639",
-    continentName: "south america",
-    numberOfCountries: 2,
+    id: data._id,
+    continentName: data.name,
+    numberOfCountries: data.noOfCountry,
   });
   if (!data) {
     // Render some kind of error message or redirect to a different page
     return <div>Error: No data found</div>;
   }
   // You can now access the data object here
-
+  const formatInput = (input) => {
+    return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
+  };
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    const formattedValue = formatInput(value);
+    setFormData({ ...formData, [name]: formattedValue });
   };
 
   const handleSubmit = (event) => {

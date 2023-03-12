@@ -5,7 +5,10 @@ const Home = () => {
     <>
       <section className="home">
         <div>
-          <h2>Welcome To add New Worlds Data's</h2>
+          <h3>
+            Discover the World, One Continent at a Time: Explore Continents,
+            Countries, States, and Cities with Ease!
+          </h3>
         </div>
         <div>
           <a href="/insert">Insert Data</a>

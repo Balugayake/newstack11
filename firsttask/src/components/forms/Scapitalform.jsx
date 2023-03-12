@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../../styles/forms.scss";
 function Scapitalform(props) {
   const location = useLocation();
   const { data } = location.state;
@@ -12,10 +13,13 @@ function Scapitalform(props) {
     statename: data.name,
     stateId: data.stateId,
   });
-
+  const formatInput = (input) => {
+    return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
+  };
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    const formattedValue = formatInput(value);
+    setFormData({ ...formData, [name]: formattedValue });
   };
 
   const handleSubmit = async (event) => {

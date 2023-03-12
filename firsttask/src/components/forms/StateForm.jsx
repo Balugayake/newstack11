@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../../styles/forms.scss";
 function StateForm() {
   const location = useLocation();
   const { data } = location.state;
@@ -13,10 +14,13 @@ function StateForm() {
     noOfCity: data.NoOfCity,
     countryId: data.countryId,
   });
-
+  const formatInput = (input) => {
+    return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
+  };
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    const formattedValue = formatInput(value);
+    setFormData({ ...formData, [name]: formattedValue });
   };
 
   const handleSubmit = async (event) => {
